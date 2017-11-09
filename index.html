@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Psychic Game</title>
+</head>
+
+<body>
+
+    <h1>The Psychic Game</h1>
+
+    <div id="game">
+        <p>Guess what letter I'm thinking of</p>
+    </div>
+
+    <script type="text/javascript">
+        
+        var computerOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
+            "r", "s", "t", "u", "v", "w", "x", "y", "z"
+        ];
+
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 10;
+        var userGuessesSoFar = 0;
+
+        document.onkeyup = function (event) {
+            
+            var userGuessesSoFar = event.key;
+            
+            var computerGuesses = computerOptions[Math.floor(Math.random() * computerOptions.length)];
+           
+
+            if (userGuessesSoFar === computerGuesses) {
+                wins++; guessesLeft=10;
+            }
+            
+            if (userGuessesSoFar !== computerGuesses) {
+                guessesLeft--;
+            }
+
+            if (guessesLeft < 1) {
+                guessesLeft=10; losses++;
+
+            }
+
+            // I still need to add way for the userGuessesSoFar to display up untill the a win or loss event takes place/ logged. 
+            // Right now, only one letter displays at a time. I need each key up event to log up to 10 times and clear once the guessesLeft count restarts. 
+
+            var html =
+                "<p>Wins: " + wins + "</p>" +
+                "<p>Losses: " + losses + "</p>" +
+                "<p>Guesses Left: " + guessesLeft + "</p>" +
+                "<p>Your Guesses so far: " + userGuessesSoFar + "</p>";
+
+                document.getElementById("game").innerHTML = html;
+
+        };
+
+    </script>
+
+</body>
+
+</html>
